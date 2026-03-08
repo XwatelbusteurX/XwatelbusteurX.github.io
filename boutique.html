@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boutique VIP — Legio Ordo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cinzel+Decorative:wght@700&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#c9a84c;--gold-l:#f0cc6e;--gold-d:#6a4e18;--gold-dim:#3a2a0a;--bg0:#03040a;--bg1:#07090f;--bg2:#0b0e16;--panel:#090d14;--border:#1a2030;--text:#d0d8e5;--muted:#4a5a70;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg0);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden;}
+.bg-grid{position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(201,168,76,.03)1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.03)1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.bg-glow{position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(ellipse,rgba(139,26,26,.12)0%,transparent 70%);pointer-events:none;z-index:0;}
+.bg-glow2{position:fixed;bottom:-300px;left:50%;transform:translateX(-50%);width:1000px;height:600px;background:radial-gradient(ellipse,rgba(201,168,76,.06)0%,transparent 70%);pointer-events:none;z-index:0;}
+.particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.particle{position:absolute;border-radius:50%;background:var(--gold);animation:float linear infinite;opacity:0;}
+@keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:.6;}90%{opacity:.3;}100%{transform:translateY(-20px) scale(1);opacity:0;}}
+.wrapper{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:0 20px 60px;}
+/* HEADER */
+header{width:100%;max-width:1100px;display:flex;align-items:center;justify-content:space-between;padding:28px 0 24px;border-bottom:1px solid var(--gold-dim);margin-bottom:60px;animation:fadeDown .8s ease both;}
+.logo-area{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.logo-hex{width:44px;height:44px;}
+.logo-title{font-family:'Cinzel',serif;font-size:18px;font-weight:900;color:var(--gold);letter-spacing:4px;}
+.logo-sub{font-family:'Rajdhani',sans-serif;font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+
+
+
+.header-version{font-family:'Rajdhani',sans-serif;font-size:12px;color:var(--muted);letter-spacing:2px;border:1px solid var(--border);padding:5px 12px;background:var(--panel);}
+/* HERO */
+.hero{width:100%;max-width:1100px;text-align:center;margin-bottom:50px;animation:fadeUp .9s ease .2s both;}
+.hero-eyebrow{font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:6px;color:var(--gold);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;justify-content:center;gap:16px;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:60px;height:1px;background:var(--gold-dim);}
+.hero-title{font-family:'Cinzel Decorative',serif;font-size:clamp(26px,5vw,50px);font-weight:700;color:#fff;text-shadow:0 0 60px rgba(201,168,76,.3);margin-bottom:10px;}
+.hero-title span{background:linear-gradient(135deg,var(--gold-l),var(--gold),#a07830);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:15px;color:var(--muted);letter-spacing:1px;font-weight:300;}
+/* SECTION LABEL */
+.section-label{font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:18px;margin-bottom:24px;width:100%;max-width:1100px;animation:fadeUp 1s ease .3s both;}
+.section-label::before,.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+/* GEM LEGEND */
+.gem-legend{display:flex;gap:24px;align-items:center;justify-content:center;background:var(--panel);border:1px solid var(--border);padding:10px 24px;margin-bottom:32px;animation:fadeUp 1s ease .32s both;}
+.gem-item{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:1px;}
+.gem-dot{width:12px;height:12px;border-radius:50%;}
+/* CARDS */
+.cards-grid{width:100%;max-width:1100px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:50px;animation:fadeUp 1s ease .4s both;}
+.grade-card{background:var(--panel);border:1px solid var(--border);position:relative;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,border-color .25s,box-shadow .25s;}
+.grade-card::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.04)0%,transparent 60%);pointer-events:none;}
+.grade-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,.5);}
+.card-topbar{height:2px;width:100%;}
+.corner{position:absolute;width:10px;height:10px;}
+.corner-tl{top:6px;left:6px;border-top:1px solid;border-left:1px solid;}
+.corner-tr{top:6px;right:6px;border-top:1px solid;border-right:1px solid;}
+.corner-bl{bottom:6px;left:6px;border-bottom:1px solid;border-left:1px solid;}
+.corner-br{bottom:6px;right:6px;border-bottom:1px solid;border-right:1px solid;}
+/* ── NAVBAR ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:58px;background:rgba(3,4,10,.97);border-bottom:2px solid var(--gold);display:flex;align-items:center;padding:0 32px;gap:24px;backdrop-filter:blur(8px);}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0;}
+.nav-title{font-family:'Cinzel',serif;font-size:16px;font-weight:900;color:var(--gold);letter-spacing:4px;display:block;}
+.nav-sub{font-family:'Rajdhani',sans-serif;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;display:block;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;margin-left:16px;}
+.nav-links a{color:var(--muted);text-decoration:none;font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;padding:6px 16px;transition:color .2s;border:1px solid transparent;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);border-color:var(--gold-d);}
+.nav-btn{margin-left:auto;font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:#000;background:linear-gradient(135deg,var(--gold-d),var(--gold));padding:8px 20px;text-decoration:none;font-weight:900;transition:opacity .2s;flex-shrink:0;}
+.nav-btn:hover{opacity:.85;}
+.badge-pop{position:absolute;top:10px;right:0;background:var(--gold);color:#000;font-family:'Cinzel',serif;font-size:8px;letter-spacing:1px;font-weight:900;padding:3px 8px;}
+.card-header{padding:18px 12px 12px;text-align:center;}
+.card-stars{font-size:11px;margin-bottom:8px;letter-spacing:3px;}
+.card-icon{font-size:32px;margin-bottom:8px;display:block;}
+.card-name{font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:#fff;margin-bottom:3px;}
+.card-duration{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:2px;color:var(--muted);}
+.card-sep{height:1px;background:var(--border);margin:0 12px;}
+.card-gems{padding:11px 12px;display:flex;flex-direction:column;gap:7px;}
+.gem-row{display:flex;align-items:center;gap:6px;font-size:11px;}
+.gem-icon{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.gem-val{font-family:'Cinzel',serif;font-size:11px;font-weight:600;}
+.card-perks{padding:0 12px 10px;flex:1;display:flex;flex-direction:column;gap:5px;}
+.perk-item{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--muted);line-height:1.4;}
+.perk-dot{flex-shrink:0;margin-top:4px;width:4px;height:4px;border-radius:50%;background:var(--gold);}
+.card-buy{padding:10px 12px 14px;}
+.btn-acheter{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px 8px;background:linear-gradient(135deg,#1a1206,#0d0c06);border:1px solid var(--gold-d);color:var(--gold-l);font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:2px;text-decoration:none;cursor:pointer;position:relative;overflow:hidden;transition:all .3s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);}
+.btn-acheter::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.15),transparent);opacity:0;transition:opacity .3s;}
+.btn-acheter:hover{border-color:var(--gold-l);color:#fff;transform:translateY(-1px);}
+.btn-acheter:hover::before{opacity:1;}
+.btn-shine{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);transform:skewX(-20deg);animation:shine 4s ease-in-out infinite;}
+@keyframes shine{0%,70%{left:-100%;}100%{left:200%;}}
+/* SECURE */
+.secure-banner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:14px 20px;background:var(--panel);border:1px solid var(--border);padding:12px 24px;margin-bottom:50px;font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:2px;color:var(--muted);width:100%;max-width:1100px;animation:fadeUp 1s ease .45s both;}
+.secure-sep{color:var(--border);}
+/* STEPS */
+.steps-grid{width:100%;max-width:1100px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:50px;animation:fadeUp 1s ease .5s both;}
+.step-card{background:var(--panel);border:1px solid var(--border);padding:24px 16px;text-align:center;position:relative;overflow:hidden;transition:border-color .3s;}
+.step-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.step-card:hover{border-color:var(--gold-dim);}
+.step-num{width:34px;height:34px;border-radius:50%;border:1px solid var(--gold-d);color:var(--gold);font-family:'Cinzel',serif;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
+.step-icon{font-size:24px;margin-bottom:8px;display:block;}
+.step-title{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:6px;text-transform:uppercase;}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+/* FAQ */
+.faq-section{width:100%;max-width:760px;margin-bottom:50px;animation:fadeUp 1s ease .6s both;}
+.faq-item{background:var(--panel);border:1px solid var(--border);margin-bottom:8px;overflow:hidden;transition:border-color .2s;}
+.faq-item:hover{border-color:var(--gold-dim);}
+.faq-item.open{border-color:var(--gold-d);}
+.faq-q{padding:14px 18px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--text);user-select:none;transition:color .2s;}
+.faq-q:hover{color:var(--gold);}
+.faq-arrow{transition:transform .25s;color:var(--gold-d);font-size:10px;}
+.faq-item.open .faq-arrow{transform:rotate(90deg);}
+.faq-a{display:none;padding:0 18px 14px;font-size:13px;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);}
+.faq-item.open .faq-a{display:block;}
+/* FOOTER */
+footer{width:100%;max-width:1100px;border-top:1px solid var(--border);padding-top:28px;display:flex;justify-content:space-between;align-items:center;animation:fadeUp 1s ease .7s both;}
+.footer-left{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--muted);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color .2s;}
+.footer-links a:hover{color:var(--gold);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:900px){.cards-grid{grid-template-columns:repeat(2,1fr);}.steps-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.cards-grid{grid-template-columns:1fr;}footer{flex-direction:column;gap:16px;text-align:center;}}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+<div class="bg-glow2"></div>
+<div class="particles" id="particles"></div>
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="38" height="38" viewBox="0 0 44 44">
+      <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="#0d1020" stroke="#c9a84c" stroke-width="1.5"/>
+      <polygon points="22,8 35,15 35,29 22,36 9,29 9,15" fill="none" stroke="#6a4e18" stroke-width="0.8"/>
+      <line x1="12" y1="22" x2="32" y2="22" stroke="#c9a84c" stroke-width="2"/>
+      <line x1="22" y1="12" x2="22" y2="32" stroke="#c9a84c" stroke-width="2"/>
+      <polygon points="22,10 24,14 20,14" fill="#c9a84c"/>
+      <polygon points="22,34 24,30 20,30" fill="#c9a84c"/>
+      <polygon points="12,22 16,20 16,24" fill="#c9a84c"/>
+      <polygon points="32,22 28,20 28,24" fill="#c9a84c"/>
+      <circle cx="22" cy="22" r="3" fill="#c9a84c"/>
+      <circle cx="22" cy="22" r="1.5" fill="#07090f"/>
+    </svg>
+    <div>
+      <span class="nav-title">LEGIO ORDO</span>
+      <span class="nav-sub">Minecraft Network</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">&#x2B07; T&eacute;l&eacute;charger</a></li>
+    <li><a href="boutique.html" class="active">&#x1F6D2; Boutique</a></li>
+    <li><a href="https://discord.gg/legioOrdo" target="_blank">&#x1F4AC; Discord</a></li>
+  </ul>
+  <a href="index.html#telecharger" class="nav-btn">&#x2B07; T&Eacute;L&Eacute;CHARGER</a>
+</nav>
+
+<div class="wrapper" style="padding-top:80px">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">&#x1F6D2; Boutique Officielle</div>
+  <h1 class="hero-title">GRADES &amp; <span>AVANTAGES</span></h1>
+  <p class="hero-sub">Soutiens l'Empire. Obtiens des pouvoirs exclusifs. Forge ta l&eacute;gende.</p>
+</div>
+
+<!-- GEM LEGEND -->
+<div class="gem-legend">
+  <span style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--muted)">INCLUS :</span>
+  <div class="gem-item">
+    <div class="gem-dot" style="background:radial-gradient(circle at 35% 35%,#64b5f6,#1565c0);border:1px solid #42a5f5"></div>
+    <span style="color:#90caf9;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px">SAPHIRS</span>
+    <span style="color:var(--muted);font-size:11px">&mdash; monnaie rare</span>
+  </div>
+  <div class="gem-item">
+    <div class="gem-dot" style="background:radial-gradient(circle at 35% 35%,#ef9a9a,#b71c1c);border:1px solid #e53935"></div>
+    <span style="color:#ef9a9a;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px">RUBYS</span>
+    <span style="color:var(--muted);font-size:11px">&mdash; monnaie premium</span>
+  </div>
+</div>
+
+<div class="section-label">Grades VIP</div>
+
+<!-- CARTES -->
+<div class="cards-grid">
+
+  <!-- Chevalier 7j -->
+  <div class="grade-card" id="c1">
+    <div class="card-topbar" style="background:#546e7a"></div>
+    <div class="corner corner-tl" style="border-color:#546e7a"></div>
+    <div class="corner corner-tr" style="border-color:#546e7a"></div>
+    <div class="corner corner-bl" style="border-color:#546e7a"></div>
+    <div class="corner corner-br" style="border-color:#546e7a"></div>
+    <div class="card-header">
+      <div class="card-stars" style="color:#546e7a">&#9733;&#9734;&#9734;&#9734;</div>
+      <span class="card-icon">&#x2694;</span>
+      <div class="card-name">Chevalier</div>
+      <div class="card-duration">7 JOURS &middot; D&Eacute;COUVERTE</div>
+    </div>
+    <div class="card-sep"></div>
+    <div class="card-gems">
+      <div class="gem-row"><div class="gem-icon" style="background:radial-gradient(circle at 35% 35%,#64b5f6,#1565c0)"></div><span class="gem-val" style="color:#90caf9">240</span><span style="color:#64b5f6">Saphirs</span></div>
+      <div class="gem-row"><div class="gem-icon" style="background:radial-gradient(circle at 35% 35%,#ef9a9a,#b71c1c)"></div><span class="gem-val" style="color:#ef9a9a">30</span><span style="color:#ef5350">Rubys</span></div>
+    </div>
+    <div class="card-sep"></div>
+    <div class="card-perks">
+      <div class="perk-item"><div class="perk-dot"></div>Tag [Chevalier] 7 jours</div>
+      <div class="perk-item"><div class="perk-dot"></div>Acc&egrave;s salon VIP Discord</div>
+      <div class="perk-item"><div class="perk-dot"></div>Couleur de pseudo</div>
+    </div>
+    <div class="card-buy">
+      <a class="btn-acheter" href="https://store.tebex.io/legio-ordo/checkout/packages/7324581">
+        <div class="btn-shine"></div>0,49 &euro;
+      </a>
+    </div>
+  </div>
+
+  <!-- Chevalier 1m -->
+  <div class="grade-card" id="c2">
+    <div class="card-topbar" style="background:#455a64"></div>
+    <div class="corner corner-tl" style="border-color:#455a64"></div>
+    <div class="corner corner-tr" style="border-color:#455a64"></div>
+    <div class="corner corner-bl" style="border-color:#455a64"></div>
+    <div class="corner corner-br" style="border-color:#455a64"></div>
+    <div class="card-header">
+      <div class="card-stars" style="color:#546e7a">&#9733;&#9733;&#9734;&#9734;</div>
+      <span class="card-icon">&#x2694;</span>
+      <div class="card-name">Chevalier</div>
+      <div class="card-duration">1 MOIS</div>
+    </div>
+    <div class="card-sep"></div>
+    <div class="card-gems">
+      <div class="gem-row"><div class="gem-icon" style="background:radial-gradient(circle at 35% 35%,#64b5f6,#1565c0)"></div><span class="gem-val" style="color:#90caf9">1 440</span><span style="color:#64b5f6">Saphirs</span></div>
+      <div class="gem-row"><div class="gem-icon" style="background:radial-gradient(circle at 35% 35%,#ef9a9a,#b71c1c)"></div><span class="gem-val" style="color:#ef9a9a">180</span><span style="color:#ef5350">Rubys</span></div>
+    </div>
+    <div class="card-sep"></div>
+    <div class="card-perks">
+      <div class="perk-item"><div class="perk-dot"></div>Tag [Chevalier] 1 mois</div>
+      <div class="perk-item"><div class="perk-dot"></div>Acc&egrave;s salon VIP Discord</div>
+      <div class="perk-item"><div class="perk-dot"></div>Couleur de pseudo</div>
+    </div>
+    <div class="card-buy">
+      <a class="btn-acheter" href="https://store.tebex.io/legio-ordo/checkout/packages/7324587">
+        <div class="btn-shine"></div>2,99 &euro;
+      </a>
+    </div>
+  </div>
+
+  <!-- Seigneur -->
+  <div class="grade-card" id="c3" style="border-color:#1565c0">
+    <div class="card-topbar" style="background:#1565c0"></div>
+    <div class="badge-pop">&#11088; POPULAIRE</div>
+    <div class="corner corner-tl" style="border-color:#1565c0"></div>
+    <div class="corner corner-tr" style="border-color:#1565c0"></div>
+    <div class="corner corner-bl" style="border-color:#1565c0"></div>
+    <div class="corner corner-br" style="border-color:#1565c0"></div>
+    <div class="card-header">
+      <div class="card-stars" style="color:#42a5f5">&#9733;&#9733;&#9733;&#9734;</div>
+      <span class="card-icon">&#x1F6E1;</span>
+      <div class="card-name" style="color:#90caf9">Seigneur</div>
+      <div class="card-duration" style="color:#42a5f5">1 MOIS</div>
+    </div>
+    <div class="card-sep"></div>
+    <div class="card-gems">
+      <div class="gem-row"><div class="gem-icon" style="background:radial-gradient(circle at 35% 35%,#64b5f6,#1565c0)"></div><span class="gem-val" style="color:#90caf9">2 880</span><span style="color:#64b5f6">Saphirs</span></div>
+      <div class="gem-row"><div class="gem-icon" style="background:radial-gradient(circle at 35% 35%,#ef9a9a,#b71c1c)"></div><span class="gem-val" style="color:#ef9a9a">360</span><span style="color:#ef5350">Rubys</span></div>
+    </div>
+    <div class="card-sep"></div>
+    <div class="card-perks">
+      <div class="perk-item"><div class="perk-dot" style="background:#42a5f5"></div>Tag [Seigneur] 1 mois</div>
+      <div class="perk-item"><div class="perk-dot" style="background:#42a5f5"></div>Kit exclusif Seigneur</div>
+      <div class="perk-item"><div class="perk-dot" style="background:#42a5f5"></div>x2 pi&egrave;ces/heure</div>
+    </div>
+    <div class="card-buy">
+      <a class="btn-acheter" style="border-color:#1565c0" href="https://store.tebex.io/legio-ordo/checkout/packages/7324591">
+        <div class="btn-shine"></div>4,60 &euro;
+      </a>
+    </div>
+  </div>
+
+  <!-- Marquis -->
+  <div class="grade-card" id="c4">
+    <div class="card-topbar" style="background:linear-gradient(90deg,var(--gold-d),var(--gold),var(--gold-d))"></div>
+    <div class="corner corner-tl" style="border-color:var(--gold)"></div>
+    <div class="corner corner-tr" style="border-color:var(--gold)"></div>
+    <div class="corner corner-bl" style="border-color:var(--gold)"></div>
+    <div class="corner corner-br" style="border-color:var(--gold)"></div>
+    <div class="card-header">
+      <div class="card-stars" style="color:var(--gold)">&#9733;&#9733;&#9733;&#9733;</div>
+      <span class="card-icon">&#x1F451;</span>
+      <div class="card-name" style="color:var(--gold-l)">Marquis</div>
+      <div class="card-duration" style="color:var(--gold)">1 MOIS</div>
+    </div>
+    <div class="card-sep"></div>
+    <div class="card-gems">
+      <div class="gem-row"><div class="gem-icon" style="background:radial-gradient(circle at 35% 35%,#64b5f6,#1565c0)"></div><span class="gem-val" style="color:#90caf9">5 760</span><span style="color:#64b5f6">Saphirs</span></div>
+      <div class="gem-row"><div class="gem-icon" style="background:radial-gradient(circle at 35% 35%,#ef9a9a,#b71c1c)"></div><span class="gem-val" style="color:#ef9a9a">720</span><span style="color:#ef5350">Rubys</span></div>
+    </div>
+    <div class="card-sep"></div>
+    <div class="card-perks">
+      <div class="perk-item"><div class="perk-dot"></div>Tag [Marquis] 1 mois</div>
+      <div class="perk-item"><div class="perk-dot"></div>Kit Marquis premium</div>
+      <div class="perk-item"><div class="perk-dot"></div>x3 pi&egrave;ces/heure</div>
+      <div class="perk-item"><div class="perk-dot"></div>Acc&egrave;s events VIP</div>
+      <div class="perk-item"><div class="perk-dot"></div>Renouvellement mensuel</div>
+    </div>
+    <div class="card-buy">
+      <a class="btn-acheter" style="border-color:var(--gold);color:var(--gold-l)" href="https://store.tebex.io/legio-ordo/checkout/packages/7324596">
+        <div class="btn-shine"></div>8,90 &euro;
+      </a>
+    </div>
+  </div>
+
+  <!-- Prince -->
+  <div class="grade-card" id="c5">
+    <div class="card-topbar" style="background:linear-gradient(90deg,#4a148c,#ab47bc,#4a148c)"></div>
+    <div class="corner corner-tl" style="border-color:#7b1fa2"></div>
+    <div class="corner corner-tr" style="border-color:#7b1fa2"></div>
+    <div class="corner corner-bl" style="border-color:#7b1fa2"></div>
+    <div class="corner corner-br" style="border-color:#7b1fa2"></div>
+    <div class="card-header">
+      <div class="card-stars" style="color:#ce93d8">&#9733;&#9733;&#9733;&#9733;+</div>
+      <span class="card-icon">&#x1F3DB;</span>
+      <div class="card-name" style="color:#ce93d8">Prince</div>
+      <div class="card-duration" style="color:#ab47bc">1 MOIS</div>
+    </div>
+    <div class="card-sep"></div>
+    <div class="card-gems">
+      <div class="gem-row"><div class="gem-icon" style="background:radial-gradient(circle at 35% 35%,#64b5f6,#1565c0)"></div><span class="gem-val" style="color:#90caf9">11 520</span><span style="color:#64b5f6">Saphirs</span></div>
+      <div class="gem-row"><div class="gem-icon" style="background:radial-gradient(circle at 35% 35%,#ef9a9a,#b71c1c)"></div><span class="gem-val" style="color:#ef9a9a">1 440</span><span style="color:#ef5350">Rubys</span></div>
+    </div>
+    <div class="card-sep"></div>
+    <div class="card-perks">
+      <div class="perk-item"><div class="perk-dot" style="background:#ab47bc"></div>Tag [Prince] 1 mois</div>
+      <div class="perk-item"><div class="perk-dot" style="background:#ab47bc"></div>Kit Prince l&eacute;gendaire</div>
+      <div class="perk-item"><div class="perk-dot" style="background:#ab47bc"></div>x5 pi&egrave;ces/heure</div>
+      <div class="perk-item"><div class="perk-dot" style="background:#ab47bc"></div>Cape imp&eacute;riale</div>
+      <div class="perk-item"><div class="perk-dot" style="background:#ab47bc"></div>Support prioritaire</div>
+    </div>
+    <div class="card-buy">
+      <a class="btn-acheter" style="border-color:#7b1fa2;color:#ce93d8" href="https://store.tebex.io/legio-ordo/checkout/packages/7324599">
+        <div class="btn-shine"></div>14,90 &euro;
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- SECURITE -->
+<div class="secure-banner">
+  <span>&#x1F512; <span style="color:var(--gold)">Paiement s&eacute;curis&eacute; SSL</span></span>
+  <span class="secure-sep">|</span>
+  <span>&#x26A1; <span style="color:var(--gold)">Livraison automatique en jeu</span></span>
+  <span class="secure-sep">|</span>
+  <span>&#x1F4B3; Carte bancaire &middot; PayPal</span>
+  <span class="secure-sep">|</span>
+  <span>&#x1F3DB; Plateforme Tebex certifi&eacute;e</span>
+</div>
+
+<!-- COMMENT CA MARCHE -->
+<div class="section-label">Comment &ccedil;a marche</div>
+<div class="steps-grid">
+  <div class="step-card"><div class="step-num">1</div><span class="step-icon">&#x1F6D2;</span><div class="step-title">Choisis ton grade</div><div class="step-desc">S&eacute;lectionne le grade et clique sur le bouton d'achat.</div></div>
+  <div class="step-card"><div class="step-num">2</div><span class="step-icon">&#x270F;&#xFE0F;</span><div class="step-title">Entre ton pseudo</div><div class="step-desc">Indique ton pseudo Minecraft exact pour l'attribution correcte.</div></div>
+  <div class="step-card"><div class="step-num">3</div><span class="step-icon">&#x1F4B3;</span><div class="step-title">Paye en s&eacute;curit&eacute;</div><div class="step-desc">Carte ou PayPal &mdash; chiffrement SSL via Tebex certifi&eacute;.</div></div>
+  <div class="step-card"><div class="step-num">4</div><span class="step-icon">&#x2694;</span><div class="step-title">Grade activ&eacute;</div><div class="step-desc">Livraison automatique d&egrave;s confirmation. Connecte-toi et profite !</div></div>
+</div>
+
+<!-- FAQ -->
+<div class="section-label" style="max-width:760px">Questions fr&eacute;quentes</div>
+<div class="faq-section">
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Mon paiement est-il s&eacute;curis&eacute; ? <span class="faq-arrow">&#9658;</span></div>
+    <div class="faq-a">Oui. Tous les paiements passent par <strong style="color:var(--gold)">Tebex</strong>, plateforme certifi&eacute;e PCI-DSS sp&eacute;cialis&eacute;e dans les serveurs de jeux. Tes donn&eacute;es bancaires ne sont jamais stock&eacute;es sur nos serveurs.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Combien de temps avant de recevoir mon grade ? <span class="faq-arrow">&#9658;</span></div>
+    <div class="faq-a">La livraison est <strong style="color:var(--gold)">automatique</strong> d&egrave;s confirmation du paiement (moins de 60 secondes). Si le serveur est hors ligne, le grade sera donn&eacute; &agrave; ta prochaine connexion.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Le grade expire-t-il ? <span class="faq-arrow">&#9658;</span></div>
+    <div class="faq-a">Oui, les grades ont une dur&eacute;e indiqu&eacute;e sur chaque carte (7 jours ou 1 mois). Tu peux renouveler &agrave; tout moment depuis cette boutique.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Je n'ai pas re&ccedil;u mon grade, que faire ? <span class="faq-arrow">&#9658;</span></div>
+    <div class="faq-a">V&eacute;rifie que ton pseudo Minecraft est correct. Si le probl&egrave;me persiste, ouvre un ticket sur notre <strong style="color:var(--gold)">Discord</strong> avec ta preuve d'achat.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">&copy; 2024 LEGIO ORDO NETWORK</div>
+  <div class="footer-links">
+    <a href="index.html">Accueil</a>
+    <a href="https://discord.gg/legioOrdo">Discord</a>
+    <a href="https://github.com/XwatelbusteurX/legio-ordo-launcher/releases">Releases</a>
+  </div>
+</footer>
+
+</div>
+<script>
+const container=document.getElementById('particles');
+for(let i=0;i<35;i++){const p=document.createElement('div');p.className='particle';const s=Math.random()*3+1;p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;container.appendChild(p);}
+function toggleFaq(el){el.parentElement.classList.toggle('open');}
+const cc={'c1':'#546e7a','c2':'#455a64','c3':'#1565c0','c4':'#c9a84c','c5':'#7b1fa2'};
+Object.entries(cc).forEach(([id,col])=>{const c=document.getElementById(id);if(!c)return;c.addEventListener('mouseenter',()=>{c.style.borderColor=col;c.style.boxShadow=`0 12px 32px rgba(0,0,0,.6),0 0 16px ${col}44`;});c.addEventListener('mouseleave',()=>{if(id!=='c4'){c.style.borderColor='';c.style.boxShadow='';}});});
+</script>
+</body>
+</html>
