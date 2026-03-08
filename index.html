@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Legio Ordo — Launcher Officiel</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cinzel+Decorative:wght@700&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&amp;family=Cinzel+Decorative:wght@700&amp;family=Rajdhani:wght@300;400;600&amp;display=swap" rel="stylesheet">
 <style>
 :root{--gold:#c9a84c;--gold-l:#f0cc6e;--gold-d:#6a4e18;--gold-dim:#3a2a0a;--bg0:#03040a;--bg1:#07090f;--bg2:#0b0e16;--panel:#090d14;--border:#1a2030;--text:#d0d8e5;--muted:#4a5a70;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -26,6 +23,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:58px;background:rgba(
 .nav-links a:hover,.nav-links a.active{color:var(--gold);border-color:var(--gold-d);}
 .nav-btn{margin-left:auto;font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:#000;background:linear-gradient(135deg,var(--gold-d),var(--gold));padding:8px 20px;text-decoration:none;font-weight:900;transition:opacity .2s;flex-shrink:0;}
 .nav-btn:hover{opacity:.85;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;margin-left:auto;}
+.nav-hamburger span{width:22px;height:2px;background:var(--gold);display:block;transition:all .3s;}
+.nav-mobile-menu{display:none;position:fixed;top:58px;left:0;right:0;background:rgba(3,4,10,.98);border-bottom:1px solid var(--gold-d);z-index:99;flex-direction:column;padding:10px 0;}
+.nav-mobile-menu a{color:var(--muted);text-decoration:none;font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;padding:14px 24px;border-bottom:1px solid var(--border);display:block;transition:color .2s;}
+.nav-mobile-menu a:hover,.nav-mobile-menu a.active{color:var(--gold);}
+.nav-mobile-menu.open{display:flex;}
+@media(max-width:600px){.nav-hamburger{display:flex;}}
 
 /* ── LAYOUT ── */
 .wrapper{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:90px 20px 60px;}
@@ -100,29 +104,72 @@ footer{width:100%;max-width:900px;border-top:1px solid var(--border);padding-top
 .footer-links a:hover{color:var(--gold);}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-@media(max-width:700px){.requirements{grid-template-columns:1fr;}.features-grid{grid-template-columns:1fr;}.card-info{grid-template-columns:1fr 1fr;}.download-card{padding:28px 24px;}footer{flex-direction:column;gap:16px;text-align:center;}.nav-links{display:none;}}
+/* ── RESPONSIVE MOBILE ── */
+@media(max-width:700px){
+  /* Navbar */
+  nav{padding:0 14px;gap:10px;}
+  .nav-title{font-size:13px;letter-spacing:2px;}
+  .nav-sub{display:none;}
+  .nav-links{display:none;}
+  nav svg{width:30px;height:30px;}
+
+  /* Wrapper */
+  .wrapper{padding:72px 12px 40px;}
+
+  /* Hero */
+  .hero{margin-bottom:32px;}
+  .hero-title{font-size:clamp(28px,10vw,52px);}
+  .hero-sub{font-size:13px;}
+  .emblem-wrap svg{width:80px;height:80px;}
+
+  /* Download card */
+  .download-card{padding:22px 16px;margin-bottom:24px;}
+  .card-name{font-size:18px;}
+  .card-info{grid-template-columns:1fr 1fr;}
+  .btn-download{font-size:13px;padding:14px 12px;}
+
+  /* Bannière boutique */
+  .shop-banner{flex-direction:column;text-align:center;padding:16px;gap:12px;}
+  .shop-banner-btn{width:100%;text-align:center;padding:12px;}
+
+  /* Requirements */
+  .requirements{grid-template-columns:1fr;gap:10px;}
+
+  /* Features */
+  .features-grid{grid-template-columns:1fr;}
+
+  /* Footer */
+  footer{flex-direction:column;gap:12px;text-align:center;}
+  .footer-links{flex-wrap:wrap;justify-content:center;}
+}
+
+@media(max-width:400px){
+  .card-info{grid-template-columns:1fr;}
+  .hero-title{font-size:26px;}
+  .download-card{padding:16px 12px;}
+}
 </style>
-</head>
-<body>
+
+
 <div class="bg-grid"></div>
 <div class="bg-glow"></div>
 <div class="bg-glow2"></div>
 <div class="particles" id="particles"></div>
 
-<!-- NAVBAR -->
+
 <nav>
   <a href="index.html" class="nav-logo">
     <svg width="38" height="38" viewBox="0 0 44 44">
-      <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="#0d1020" stroke="#c9a84c" stroke-width="1.5"/>
-      <polygon points="22,8 35,15 35,29 22,36 9,29 9,15" fill="none" stroke="#6a4e18" stroke-width="0.8"/>
-      <line x1="12" y1="22" x2="32" y2="22" stroke="#c9a84c" stroke-width="2"/>
-      <line x1="22" y1="12" x2="22" y2="32" stroke="#c9a84c" stroke-width="2"/>
-      <polygon points="22,10 24,14 20,14" fill="#c9a84c"/>
-      <polygon points="22,34 24,30 20,30" fill="#c9a84c"/>
-      <polygon points="12,22 16,20 16,24" fill="#c9a84c"/>
-      <polygon points="32,22 28,20 28,24" fill="#c9a84c"/>
-      <circle cx="22" cy="22" r="3" fill="#c9a84c"/>
-      <circle cx="22" cy="22" r="1.5" fill="#07090f"/>
+      <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="#0d1020" stroke="#c9a84c" stroke-width="1.5"></polygon>
+      <polygon points="22,8 35,15 35,29 22,36 9,29 9,15" fill="none" stroke="#6a4e18" stroke-width="0.8"></polygon>
+      <line x1="12" y1="22" x2="32" y2="22" stroke="#c9a84c" stroke-width="2"></line>
+      <line x1="22" y1="12" x2="22" y2="32" stroke="#c9a84c" stroke-width="2"></line>
+      <polygon points="22,10 24,14 20,14" fill="#c9a84c"></polygon>
+      <polygon points="22,34 24,30 20,30" fill="#c9a84c"></polygon>
+      <polygon points="12,22 16,20 16,24" fill="#c9a84c"></polygon>
+      <polygon points="32,22 28,20 28,24" fill="#c9a84c"></polygon>
+      <circle cx="22" cy="22" r="3" fill="#c9a84c"></circle>
+      <circle cx="22" cy="22" r="1.5" fill="#07090f"></circle>
     </svg>
     <div>
       <span class="nav-title">LEGIO ORDO</span>
@@ -130,49 +177,56 @@ footer{width:100%;max-width:900px;border-top:1px solid var(--border);padding-top
     </div>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html" class="active">⬇ T&eacute;l&eacute;charger</a></li>
-    <li><a href="boutique.html">&#x1F6D2; Boutique</a></li>
-    <li><a href="https://discord.gg/legioOrdo" target="_blank">&#x1F4AC; Discord</a></li>
+    <li><a href="index.html" class="active">⬇ Télécharger</a></li>
+    <li><a href="boutique.html">🛒 Boutique</a></li>
+    <li><a href="https://discord.gg/legioOrdo" target="_blank">💬 Discord</a></li>
   </ul>
-  <a href="https://adfly.site/6vPnSiQ" class="nav-btn">&#9660; T&Eacute;L&Eacute;CHARGER</a>
+  
+  <div class="nav-hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-mobile-menu" id="mobileMenu">
+    <a href="boutique.html">🛒 Boutique</a>
+    <a href="https://discord.gg/legioOrdo" target="_blank">💬 Discord</a>
+  </div>
 </nav>
 
 <div class="wrapper">
-  <!-- HERO -->
+  
   <div class="hero">
-    <div class="hero-eyebrow">&#x2694; Launcher Officiel &#x2694;</div>
+    <div class="hero-eyebrow">⚔ Launcher Officiel ⚔</div>
     <h1 class="hero-title">LEGIO<br><span>ORDO</span></h1>
-    <p class="hero-sub">Rejoignez l'Empire. Forgez votre L&eacute;gion. Combattez pour la gloire.</p>
+    <p class="hero-sub">Rejoignez l'Empire. Forgez votre Légion. Combattez pour la gloire.</p>
     <div class="emblem-wrap">
       <svg width="120" height="120" viewBox="0 0 120 120">
         <defs>
           <radialGradient id="hexGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#1a1206"/>
-            <stop offset="100%" stop-color="#03040a"/>
+            <stop offset="0%" stop-color="#1a1206"></stop>
+            <stop offset="100%" stop-color="#03040a"></stop>
           </radialGradient>
-          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur><feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter>
         </defs>
-        <polygon points="60,5 108,32 108,88 60,115 12,88 12,32" fill="url(#hexGrad)" stroke="#c9a84c" stroke-width="2" filter="url(#glow)"/>
-        <polygon points="60,18 96,38 96,78 60,98 24,78 24,38" fill="none" stroke="#6a4e18" stroke-width="1"/>
-        <circle cx="60" cy="18" r="3" fill="#c9a84c" opacity=".8"/>
-        <circle cx="96" cy="38" r="3" fill="#c9a84c" opacity=".8"/>
-        <circle cx="96" cy="78" r="3" fill="#c9a84c" opacity=".8"/>
-        <circle cx="60" cy="98" r="3" fill="#c9a84c" opacity=".8"/>
-        <circle cx="24" cy="78" r="3" fill="#c9a84c" opacity=".8"/>
-        <circle cx="24" cy="38" r="3" fill="#c9a84c" opacity=".8"/>
-        <line x1="28" y1="60" x2="92" y2="60" stroke="#c9a84c" stroke-width="3" stroke-linecap="round"/>
-        <line x1="60" y1="28" x2="60" y2="92" stroke="#c9a84c" stroke-width="3" stroke-linecap="round"/>
-        <polygon points="60,22 63,30 57,30" fill="#c9a84c"/>
-        <polygon points="60,98 63,90 57,90" fill="#c9a84c"/>
-        <polygon points="22,60 30,57 30,63" fill="#c9a84c"/>
-        <polygon points="98,60 90,57 90,63" fill="#c9a84c"/>
-        <circle cx="60" cy="60" r="7" fill="#c9a84c"/>
-        <circle cx="60" cy="60" r="3.5" fill="#03040a"/>
+        <polygon points="60,5 108,32 108,88 60,115 12,88 12,32" fill="url(#hexGrad)" stroke="#c9a84c" stroke-width="2" filter="url(#glow)"></polygon>
+        <polygon points="60,18 96,38 96,78 60,98 24,78 24,38" fill="none" stroke="#6a4e18" stroke-width="1"></polygon>
+        <circle cx="60" cy="18" r="3" fill="#c9a84c" opacity=".8"></circle>
+        <circle cx="96" cy="38" r="3" fill="#c9a84c" opacity=".8"></circle>
+        <circle cx="96" cy="78" r="3" fill="#c9a84c" opacity=".8"></circle>
+        <circle cx="60" cy="98" r="3" fill="#c9a84c" opacity=".8"></circle>
+        <circle cx="24" cy="78" r="3" fill="#c9a84c" opacity=".8"></circle>
+        <circle cx="24" cy="38" r="3" fill="#c9a84c" opacity=".8"></circle>
+        <line x1="28" y1="60" x2="92" y2="60" stroke="#c9a84c" stroke-width="3" stroke-linecap="round"></line>
+        <line x1="60" y1="28" x2="60" y2="92" stroke="#c9a84c" stroke-width="3" stroke-linecap="round"></line>
+        <polygon points="60,22 63,30 57,30" fill="#c9a84c"></polygon>
+        <polygon points="60,98 63,90 57,90" fill="#c9a84c"></polygon>
+        <polygon points="22,60 30,57 30,63" fill="#c9a84c"></polygon>
+        <polygon points="98,60 90,57 90,63" fill="#c9a84c"></polygon>
+        <circle cx="60" cy="60" r="7" fill="#c9a84c"></circle>
+        <circle cx="60" cy="60" r="3.5" fill="#03040a"></circle>
       </svg>
     </div>
   </div>
 
-  <!-- DOWNLOAD CARD -->
+  
   <div class="download-card" id="telecharger">
     <div class="corner corner-tl"></div>
     <div class="corner corner-tr"></div>
@@ -181,64 +235,64 @@ footer{width:100%;max-width:900px;border-top:1px solid var(--border);padding-top
     <div class="card-title">Launcher Officiel</div>
     <div class="card-name">LegioOrdo.exe</div>
     <div class="card-info">
-      <div class="info-item"><div class="info-label">Version</div><div class="info-value">1.0.1</div></div>
+      <div class="info-item"><div class="info-label">Version</div><div class="info-value">1.0.0</div></div>
       <div class="info-item"><div class="info-label">Plateforme</div><div class="info-value">Windows</div></div>
       <div class="info-item"><div class="info-label">MC</div><div class="info-value">1.20.4</div></div>
     </div>
     <a class="btn-download" href="https://adfly.site/6vPnSiQ">
       <div class="btn-shine"></div>
-      <span style="font-size:22px">&#x2B07;</span>
-      <span>T&Eacute;L&Eacute;CHARGER</span>
+      <span style="font-size:22px">⬇</span>
+      <span>TÉLÉCHARGER</span>
     </a>
-    <div class="btn-note">Windows 10/11 &middot; 64-bit &middot; Mise &agrave; jour automatique incluse</div>
+    <div class="btn-note">Windows 10/11 · 64-bit · Mise à jour automatique incluse</div>
   </div>
 
-  <!-- BANNIERE BOUTIQUE -->
+  
   <div class="shop-banner">
     <div class="shop-banner-text">
-      <div class="shop-title">&#x1F6D2; BOUTIQUE VIP &mdash; SAISON I</div>
-      <div class="shop-sub">Grades Chevalier, Seigneur, Marquis, Prince &mdash; livraison automatique en jeu</div>
+      <div class="shop-title">🛒 BOUTIQUE VIP — SAISON I</div>
+      <div class="shop-sub">Grades Chevalier, Seigneur, Marquis, Prince — livraison automatique en jeu</div>
     </div>
-    <a href="boutique.html" class="shop-banner-btn">VOIR LES GRADES &#x2192;</a>
+    <a href="boutique.html" class="shop-banner-btn">VOIR LES GRADES →</a>
   </div>
 
-  <!-- REQUIREMENTS -->
+  
   <div class="requirements">
     <div class="req-card">
-      <span class="req-icon">&#x2615;</span>
+      <span class="req-icon">☕</span>
       <div class="req-title">Java 17+</div>
-      <div class="req-desc">Requis pour lancer Minecraft.<br><a href="https://adoptium.net" target="_blank">T&eacute;l&eacute;charger Java &rarr;</a></div>
+      <div class="req-desc">Requis pour lancer Minecraft.<br><a href="https://adoptium.net" target="_blank">Télécharger Java →</a></div>
     </div>
     <div class="req-card">
-      <span class="req-icon">&#x1F3AE;</span>
+      <span class="req-icon">🎮</span>
       <div class="req-title">Compte Minecraft</div>
-      <div class="req-desc">Compte Microsoft avec Minecraft Java Edition achet&eacute;.</div>
+      <div class="req-desc">Compte Microsoft avec Minecraft Java Edition acheté.</div>
     </div>
     <div class="req-card">
-      <span class="req-icon">&#x1F4BB;</span>
+      <span class="req-icon">💻</span>
       <div class="req-title">Configuration</div>
-      <div class="req-desc">Windows 10/11 &middot; 4 Go RAM minimum &middot; 2 Go disque libre.</div>
+      <div class="req-desc">Windows 10/11 · 4 Go RAM minimum · 2 Go disque libre.</div>
     </div>
   </div>
 
-  <!-- FEATURES -->
+  
   <div class="features">
-    <div class="section-title">Fonctionnalit&eacute;s</div>
+    <div class="section-title">Fonctionnalités</div>
     <div class="features-grid">
-      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Connexion Microsoft</strong> &mdash; Authentification s&eacute;curis&eacute;e avec votre vrai compte Minecraft.</div></div>
-      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Mise &agrave; jour automatique</strong> &mdash; Le launcher se met &agrave; jour sans intervention.</div></div>
-      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Gestion de la RAM</strong> &mdash; Allouez la m&eacute;moire id&eacute;ale pour votre machine.</div></div>
-      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Classement en direct</strong> &mdash; Consultez le top des joueurs directement depuis le launcher.</div></div>
-      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Serveur</strong> play.legio-ordo.fr &mdash; Connexion directe en un clic.</div></div>
-      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Interface immersive</strong> &mdash; Design exclusif inspir&eacute; de l'univers Romain.</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Connexion Microsoft</strong> — Authentification sécurisée avec votre vrai compte Minecraft.</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Mise à jour automatique</strong> — Le launcher se met à jour sans intervention.</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Gestion de la RAM</strong> — Allouez la mémoire idéale pour votre machine.</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Classement en direct</strong> — Consultez le top des joueurs directement depuis le launcher.</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Serveur</strong> play.legio-ordo.fr — Connexion directe en un clic.</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Interface immersive</strong> — Design exclusif inspiré de l'univers Romain.</div></div>
     </div>
   </div>
 
-  <!-- FOOTER -->
+  
   <footer>
-    <div class="footer-left">&copy; 2024 LEGIO ORDO NETWORK</div>
+    <div class="footer-left">© 2024 LEGIO ORDO NETWORK</div>
     <div class="footer-links">
-      <a href="boutique.html">&#x1F6D2; Boutique</a>
+      <a href="boutique.html">🛒 Boutique</a>
       <a href="https://discord.gg/legioOrdo">Discord</a>
       <a href="https://github.com/XwatelbusteurX/legio-ordo-launcher/releases">Releases</a>
     </div>
@@ -248,6 +302,18 @@ footer{width:100%;max-width:900px;border-top:1px solid var(--border);padding-top
 <script>
 const container=document.getElementById('particles');
 for(let i=0;i<35;i++){const p=document.createElement('div');p.className='particle';const s=Math.random()*3+1;p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;container.appendChild(p);}
+
+function toggleMenu(){
+  const m=document.getElementById('mobileMenu');
+  const h=document.getElementById('hamburger');
+  m.classList.toggle('open');
+  const spans=h.querySelectorAll('span');
+  if(m.classList.contains('open')){
+    spans[0].style.transform='rotate(45deg) translate(5px,5px)';
+    spans[1].style.opacity='0';
+    spans[2].style.transform='rotate(-45deg) translate(5px,-5px)';
+  } else {
+    spans[0].style.transform='';spans[1].style.opacity='';spans[2].style.transform='';
+  }
+}
 </script>
-</body>
-</html>
