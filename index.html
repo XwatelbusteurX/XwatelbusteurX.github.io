@@ -17,17 +17,19 @@ body{background:var(--bg0);color:var(--text);font-family:'Rajdhani',sans-serif;m
 @keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:.6;}90%{opacity:.3;}100%{transform:translateY(-20px) scale(1);opacity:0;}}
 
 /* ── NAVBAR ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:58px;background:rgba(3,4,10,.97);border-bottom:2px solid var(--gold);display:flex;align-items:center;padding:0 32px;gap:24px;backdrop-filter:blur(8px);}
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0;}
-.nav-title{font-family:'Cinzel',serif;font-size:16px;font-weight:900;color:var(--gold);letter-spacing:4px;display:block;}
-.nav-sub{font-family:'Rajdhani',sans-serif;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;display:block;}
-.nav-links{display:none;align-items:center;gap:4px;list-style:none;margin-left:16px;}
-.nav-links a{color:var(--muted);text-decoration:none;font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;padding:6px 16px;transition:color .2s;position:relative;border:1px solid transparent;}
-.nav-links a:hover,.nav-links a.active{color:var(--gold);border-color:var(--gold-d);}
-.nav-btn{margin-left:auto;font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:#000;background:linear-gradient(135deg,var(--gold-d),var(--gold));padding:8px 20px;text-decoration:none;font-weight:900;transition:all .25s ease;flex-shrink:0;border-radius:8px;position:relative;overflow:hidden;box-shadow:0 0 10px rgba(201,168,76,.2);}
-.nav-btn::after{content:'';position:absolute;inset:0;border-radius:8px;background:rgba(255,255,255,0);transition:background .25s;}
-.nav-btn:hover{opacity:1;transform:translateY(-2px);box-shadow:0 0 22px rgba(201,168,76,.55);filter:brightness(1.15);}
-.nav-btn:active{transform:translateY(0);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:62px;background:rgba(3,4,10,.98);border-bottom:1px solid rgba(201,168,76,.25);display:flex;align-items:center;padding:0 40px;gap:0;backdrop-filter:blur(12px);}
+nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold-l),var(--gold),transparent);opacity:.5;}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;padding-right:36px;border-right:1px solid var(--border);}
+.nav-title{font-family:'Cinzel',serif;font-size:15px;font-weight:900;color:var(--gold);letter-spacing:5px;display:block;line-height:1.1;}
+.nav-sub{font-family:'Rajdhani',sans-serif;font-size:9px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;display:block;margin-top:1px;}
+.nav-links{display:flex;align-items:center;list-style:none;margin-left:auto;gap:2px;}
+.nav-links a{color:var(--muted);text-decoration:none;font-family:'Cinzel',serif;font-size:10.5px;letter-spacing:2.5px;padding:8px 18px;transition:all .2s;position:relative;display:flex;align-items:center;gap:7px;border-radius:6px;text-transform:uppercase;}
+.nav-links a .nav-icon{font-size:13px;opacity:.7;transition:opacity .2s;}
+.nav-links a:hover{color:var(--gold-l);background:rgba(201,168,76,.06);}
+.nav-links a:hover .nav-icon{opacity:1;}
+.nav-links a.active{color:var(--gold);background:rgba(201,168,76,.08);box-shadow:inset 0 0 0 1px rgba(201,168,76,.3);}
+.nav-links a.active::after{content:'';position:absolute;bottom:-1px;left:20%;right:20%;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);border-radius:2px;}
+.nav-sep{width:1px;height:18px;background:var(--border);margin:0 6px;flex-shrink:0;}
 
 /* ── LAYOUT ── */
 .wrapper{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:90px 20px 60px;}
@@ -117,7 +119,7 @@ footer{width:100%;max-width:900px;border-top:1px solid var(--border);padding-top
 <!-- NAVBAR -->
 <nav>
   <a href="index.html" class="nav-logo">
-    <svg width="38" height="38" viewBox="0 0 44 44">
+    <svg width="36" height="36" viewBox="0 0 44 44">
       <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="#0d1020" stroke="#c9a84c" stroke-width="1.5"/>
       <polygon points="22,8 35,15 35,29 22,36 9,29 9,15" fill="none" stroke="#6a4e18" stroke-width="0.8"/>
       <line x1="12" y1="22" x2="32" y2="22" stroke="#c9a84c" stroke-width="2"/>
@@ -135,11 +137,12 @@ footer{width:100%;max-width:900px;border-top:1px solid var(--border);padding-top
     </div>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html" class="active">⬇ T&eacute;l&eacute;charger</a></li>
-    <li><a href="boutique.html">&#x1F6D2; Boutique</a></li>
-    <li><a href="https://discord.gg/legioOrdo" target="_blank">&#x1F4AC; Discord</a></li>
+    <li><a href="index.html" class="active"><span class="nav-icon">&#x2B07;</span>T&eacute;l&eacute;charger</a></li>
+    <li><div class="nav-sep"></div></li>
+    <li><a href="boutique.html"><span class="nav-icon">&#x1F6D2;</span>Boutique</a></li>
+    <li><div class="nav-sep"></div></li>
+    <li><a href="https://discord.gg/legioOrdo" target="_blank"><span class="nav-icon">&#x1F4AC;</span>Discord</a></li>
   </ul>
-  <a href="boutique.html" class="nav-btn">&#x1F6D2; BOUTIQUE</a>
 </nav>
 
 <div class="wrapper">
