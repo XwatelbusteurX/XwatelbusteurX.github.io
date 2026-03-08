@@ -3,414 +3,146 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Legio Ordo — Télécharger le Launcher</title>
+<title>Legio Ordo — Launcher Officiel</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cinzel+Decorative:wght@700&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --gold:     #c9a84c;
-    --gold-l:   #f0cc6e;
-    --gold-d:   #6a4e18;
-    --gold-dim: #3a2a0a;
-    --blood:    #8b1a1a;
-    --red:      #c0392b;
-    --bg0:      #03040a;
-    --bg1:      #07090f;
-    --bg2:      #0b0e16;
-    --panel:    #090d14;
-    --border:   #1a2030;
-    --text:     #d0d8e5;
-    --muted:    #4a5a70;
-  }
+:root{--gold:#c9a84c;--gold-l:#f0cc6e;--gold-d:#6a4e18;--gold-dim:#3a2a0a;--bg0:#03040a;--bg1:#07090f;--bg2:#0b0e16;--panel:#090d14;--border:#1a2030;--text:#d0d8e5;--muted:#4a5a70;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg0);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden;}
+.bg-grid{position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(201,168,76,.03)1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.03)1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.bg-glow{position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(ellipse,rgba(139,26,26,.12)0%,transparent 70%);pointer-events:none;z-index:0;}
+.bg-glow2{position:fixed;bottom:-300px;left:50%;transform:translateX(-50%);width:1000px;height:600px;background:radial-gradient(ellipse,rgba(201,168,76,.06)0%,transparent 70%);pointer-events:none;z-index:0;}
+.particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.particle{position:absolute;border-radius:50%;background:var(--gold);animation:float linear infinite;opacity:0;}
+@keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:.6;}90%{opacity:.3;}100%{transform:translateY(-20px) scale(1);opacity:0;}}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* ── NAVBAR ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:58px;background:rgba(3,4,10,.97);border-bottom:2px solid var(--gold);display:flex;align-items:center;padding:0 32px;gap:24px;backdrop-filter:blur(8px);}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0;}
+.nav-title{font-family:'Cinzel',serif;font-size:16px;font-weight:900;color:var(--gold);letter-spacing:4px;display:block;}
+.nav-sub{font-family:'Rajdhani',sans-serif;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;display:block;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;margin-left:16px;}
+.nav-links a{color:var(--muted);text-decoration:none;font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;padding:6px 16px;transition:color .2s;position:relative;border:1px solid transparent;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);border-color:var(--gold-d);}
+.nav-btn{margin-left:auto;font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:#000;background:linear-gradient(135deg,var(--gold-d),var(--gold));padding:8px 20px;text-decoration:none;font-weight:900;transition:opacity .2s;flex-shrink:0;}
+.nav-btn:hover{opacity:.85;}
 
-  body {
-    background: var(--bg0);
-    color: var(--text);
-    font-family: 'Rajdhani', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-    cursor: default;
-  }
+/* ── LAYOUT ── */
+.wrapper{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:90px 20px 60px;}
 
-  /* ── BACKGROUND ── */
-  .bg-canvas {
-    position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  }
-  .bg-grid {
-    position: fixed; inset: 0; z-index: 0;
-    background-image:
-      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-  }
-  .bg-glow {
-    position: fixed; top: -200px; left: 50%; transform: translateX(-50%);
-    width: 800px; height: 800px;
-    background: radial-gradient(ellipse, rgba(139,26,26,0.12) 0%, transparent 70%);
-    pointer-events: none; z-index: 0;
-  }
-  .bg-glow2 {
-    position: fixed; bottom: -300px; left: 50%; transform: translateX(-50%);
-    width: 1000px; height: 600px;
-    background: radial-gradient(ellipse, rgba(201,168,76,0.06) 0%, transparent 70%);
-    pointer-events: none; z-index: 0;
-  }
+/* ── HERO ── */
+.hero{width:100%;max-width:900px;text-align:center;margin-bottom:60px;animation:fadeUp .9s ease .1s both;}
+.hero-eyebrow{font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:6px;color:var(--gold);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;justify-content:center;gap:16px;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:60px;height:1px;background:var(--gold-dim);}
+.hero-title{font-family:'Cinzel Decorative',serif;font-size:clamp(36px,7vw,72px);font-weight:700;line-height:1.1;color:#fff;text-shadow:0 0 60px rgba(201,168,76,.3);margin-bottom:10px;}
+.hero-title span{background:linear-gradient(135deg,var(--gold-l),var(--gold),#a07830);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:16px;color:var(--muted);letter-spacing:1px;margin-bottom:50px;font-weight:300;}
+.emblem-wrap{display:flex;justify-content:center;margin-bottom:50px;animation:pulse-glow 3s ease-in-out infinite;}
+@keyframes pulse-glow{0%,100%{filter:drop-shadow(0 0 20px rgba(201,168,76,.3));}50%{filter:drop-shadow(0 0 50px rgba(201,168,76,.6));}}
 
-  /* ── PARTICLES ── */
-  .particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-  .particle {
-    position: absolute;
-    border-radius: 50%;
-    background: var(--gold);
-    animation: float linear infinite;
-    opacity: 0;
-  }
-  @keyframes float {
-    0%   { transform: translateY(100vh) scale(0); opacity: 0; }
-    10%  { opacity: 0.6; }
-    90%  { opacity: 0.3; }
-    100% { transform: translateY(-20px) scale(1); opacity: 0; }
-  }
+/* ── DOWNLOAD CARD ── */
+.download-card{width:100%;max-width:560px;background:var(--panel);border:1px solid var(--gold-dim);position:relative;padding:40px 44px;margin-bottom:40px;animation:fadeUp 1s ease .3s both;overflow:hidden;}
+.download-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold-l),var(--gold),transparent);}
+.download-card::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.04)0%,transparent 60%);pointer-events:none;}
+.corner{position:absolute;width:16px;height:16px;}
+.corner-tl{top:8px;left:8px;border-top:1px solid var(--gold);border-left:1px solid var(--gold);}
+.corner-tr{top:8px;right:8px;border-top:1px solid var(--gold);border-right:1px solid var(--gold);}
+.corner-bl{bottom:8px;left:8px;border-bottom:1px solid var(--gold);border-left:1px solid var(--gold);}
+.corner-br{bottom:8px;right:8px;border-bottom:1px solid var(--gold);border-right:1px solid var(--gold);}
+.card-title{font-family:'Cinzel',serif;font-size:13px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-bottom:6px;}
+.card-name{font-family:'Cinzel',serif;font-size:24px;font-weight:600;color:var(--gold-l);margin-bottom:24px;}
+.card-info{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:32px;}
+.info-item{background:var(--bg2);border:1px solid var(--border);padding:12px 14px;text-align:center;}
+.info-label{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;}
+.info-value{font-family:'Cinzel',serif;font-size:14px;color:var(--gold);}
+.btn-download{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;padding:18px 24px;background:linear-gradient(135deg,#1a1206,#0d0c06);border:1px solid var(--gold);color:var(--gold-l);font-family:'Cinzel',serif;font-size:16px;font-weight:600;letter-spacing:3px;text-transform:uppercase;text-decoration:none;cursor:pointer;position:relative;overflow:hidden;transition:all .3s;clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);margin-bottom:14px;}
+.btn-download::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.15),transparent);opacity:0;transition:opacity .3s;}
+.btn-download:hover{border-color:var(--gold-l);color:#fff;transform:translateY(-2px);}
+.btn-download:hover::before{opacity:1;}
+.btn-shine{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);transform:skewX(-20deg);animation:shine 4s ease-in-out infinite;}
+@keyframes shine{0%,70%{left:-100%;}100%{left:200%;}}
+.btn-note{font-size:11px;color:var(--muted);letter-spacing:1px;text-align:center;}
 
-  /* ── LAYOUT ── */
-  .wrapper {
-    position: relative; z-index: 1;
-    min-height: 100vh;
-    display: flex; flex-direction: column; align-items: center;
-    padding: 0 20px 60px;
-  }
+/* ── BANNIERE BOUTIQUE ── */
+.shop-banner{width:100%;max-width:560px;background:var(--panel);border:1px solid var(--gold-d);padding:20px 28px;margin-bottom:50px;display:flex;align-items:center;justify-content:space-between;gap:16px;animation:fadeUp 1s ease .4s both;position:relative;overflow:hidden;}
+.shop-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d),transparent);}
+.shop-banner-text .shop-title{font-family:'Cinzel',serif;font-size:13px;color:var(--gold-l);letter-spacing:2px;margin-bottom:4px;}
+.shop-banner-text .shop-sub{font-size:12px;color:var(--muted);}
+.shop-banner-btn{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:#000;background:linear-gradient(135deg,var(--gold-d),var(--gold));padding:10px 18px;text-decoration:none;font-weight:900;white-space:nowrap;transition:opacity .2s;flex-shrink:0;}
+.shop-banner-btn:hover{opacity:.85;}
 
-  /* ── HEADER ── */
-  header {
-    width: 100%; max-width: 900px;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 28px 0 24px;
-    border-bottom: 1px solid var(--gold-dim);
-    margin-bottom: 70px;
-    animation: fadeDown 0.8s ease both;
-  }
-  .logo-area { display: flex; align-items: center; gap: 14px; }
-  .logo-hex { width: 44px; height: 44px; }
-  .logo-title {
-    font-family: 'Cinzel', serif;
-    font-size: 18px; font-weight: 900;
-    color: var(--gold);
-    letter-spacing: 4px;
-  }
-  .logo-sub {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 11px; color: var(--muted);
-    letter-spacing: 2px; text-transform: uppercase;
-  }
-  .header-version {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 12px; color: var(--muted);
-    letter-spacing: 2px;
-    border: 1px solid var(--border);
-    padding: 5px 12px;
-    background: var(--panel);
-  }
+/* ── REQUIREMENTS ── */
+.requirements{width:100%;max-width:900px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:50px;animation:fadeUp 1s ease .5s both;}
+.req-card{background:var(--panel);border:1px solid var(--border);padding:24px 20px;position:relative;overflow:hidden;transition:border-color .3s;}
+.req-card:hover{border-color:var(--gold-dim);}
+.req-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.req-icon{font-size:26px;margin-bottom:12px;display:block;}
+.req-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--gold);margin-bottom:6px;text-transform:uppercase;}
+.req-desc{font-size:13px;color:var(--muted);line-height:1.5;}
+.req-desc a{color:var(--gold);text-decoration:none;}
 
-  /* ── HERO ── */
-  .hero {
-    width: 100%; max-width: 900px;
-    text-align: center;
-    margin-bottom: 70px;
-    animation: fadeUp 0.9s ease 0.2s both;
-  }
-  .hero-eyebrow {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 12px; letter-spacing: 6px;
-    color: var(--gold); text-transform: uppercase;
-    margin-bottom: 18px;
-    display: flex; align-items: center; justify-content: center; gap: 16px;
-  }
-  .hero-eyebrow::before, .hero-eyebrow::after {
-    content: ''; display: block;
-    width: 60px; height: 1px; background: var(--gold-dim);
-  }
-  .hero-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(36px, 7vw, 72px);
-    font-weight: 700;
-    line-height: 1.1;
-    color: #fff;
-    text-shadow: 0 0 60px rgba(201,168,76,0.3);
-    margin-bottom: 10px;
-  }
-  .hero-title span {
-    background: linear-gradient(135deg, var(--gold-l), var(--gold), #a07830);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .hero-sub {
-    font-size: 16px; color: var(--muted);
-    letter-spacing: 1px; margin-bottom: 50px;
-    font-weight: 300;
-  }
+/* ── FEATURES ── */
+.features{width:100%;max-width:900px;margin-bottom:50px;animation:fadeUp 1s ease .6s both;}
+.section-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;color:var(--muted);text-transform:uppercase;text-align:center;margin-bottom:28px;display:flex;align-items:center;gap:18px;}
+.section-title::before,.section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.feature-item{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:var(--bg2);border:1px solid var(--border);transition:border-color .3s;}
+.feature-item:hover{border-color:var(--gold-dim);}
+.feature-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px;}
+.feature-text{font-size:14px;color:var(--text);line-height:1.5;}
+.feature-text strong{color:var(--gold-l);font-weight:600;}
 
-  /* Emblème central */
-  .emblem-wrap {
-    display: flex; justify-content: center; margin-bottom: 50px;
-    animation: pulse-glow 3s ease-in-out infinite;
-  }
-  @keyframes pulse-glow {
-    0%,100% { filter: drop-shadow(0 0 20px rgba(201,168,76,0.3)); }
-    50%      { filter: drop-shadow(0 0 50px rgba(201,168,76,0.6)); }
-  }
+/* ── FOOTER ── */
+footer{width:100%;max-width:900px;border-top:1px solid var(--border);padding-top:28px;display:flex;justify-content:space-between;align-items:center;animation:fadeUp 1s ease .7s both;}
+.footer-left{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--muted);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color .2s;}
+.footer-links a:hover{color:var(--gold);}
 
-  /* ── DOWNLOAD CARD ── */
-  .download-card {
-    width: 100%; max-width: 560px;
-    background: var(--panel);
-    border: 1px solid var(--gold-dim);
-    position: relative;
-    padding: 40px 44px;
-    margin-bottom: 60px;
-    animation: fadeUp 1s ease 0.4s both;
-    overflow: hidden;
-  }
-  .download-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-l), var(--gold), transparent);
-  }
-  .download-card::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.04) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  /* Coins décor */
-  .corner { position: absolute; width: 16px; height: 16px; }
-  .corner-tl { top: 8px; left: 8px; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); }
-  .corner-tr { top: 8px; right: 8px; border-top: 1px solid var(--gold); border-right: 1px solid var(--gold); }
-  .corner-bl { bottom: 8px; left: 8px; border-bottom: 1px solid var(--gold); border-left: 1px solid var(--gold); }
-  .corner-br { bottom: 8px; right: 8px; border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); }
-
-  .card-title {
-    font-family: 'Cinzel', serif;
-    font-size: 13px; letter-spacing: 4px;
-    color: var(--muted); text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .card-name {
-    font-family: 'Cinzel', serif;
-    font-size: 24px; font-weight: 600;
-    color: var(--gold-l); margin-bottom: 24px;
-  }
-
-  .card-info {
-    display: grid; grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px; margin-bottom: 32px;
-  }
-  .info-item {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    padding: 12px 14px;
-    text-align: center;
-  }
-  .info-label {
-    font-size: 10px; letter-spacing: 2px;
-    color: var(--muted); text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .info-value {
-    font-family: 'Cinzel', serif;
-    font-size: 14px; color: var(--gold);
-  }
-
-  /* ── BOUTON DOWNLOAD ── */
-  .btn-download {
-    display: flex; align-items: center; justify-content: center; gap: 14px;
-    width: 100%; padding: 18px 24px;
-    background: linear-gradient(135deg, #1a1206, #0d0c06);
-    border: 1px solid var(--gold);
-    color: var(--gold-l);
-    font-family: 'Cinzel', serif;
-    font-size: 16px; font-weight: 600;
-    letter-spacing: 3px; text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    position: relative; overflow: hidden;
-    transition: all 0.3s ease;
-    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
-    margin-bottom: 14px;
-  }
-  .btn-download::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(201,168,76,0.15), transparent);
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .btn-download:hover { border-color: var(--gold-l); color: #fff; transform: translateY(-2px); }
-  .btn-download:hover::before { opacity: 1; }
-  .btn-download:active { transform: translateY(0); }
-
-  .btn-icon { font-size: 22px; }
-  .btn-shine {
-    position: absolute; top: 0; left: -100%;
-    width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
-    transform: skewX(-20deg);
-    animation: shine 4s ease-in-out infinite;
-  }
-  @keyframes shine {
-    0%,70%  { left: -100%; }
-    100%    { left: 200%; }
-  }
-
-  .btn-note {
-    font-size: 11px; color: var(--muted);
-    letter-spacing: 1px; text-align: center;
-  }
-
-  /* ── REQUIREMENTS ── */
-  .requirements {
-    width: 100%; max-width: 900px;
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 16px; margin-bottom: 60px;
-    animation: fadeUp 1s ease 0.6s both;
-  }
-  .req-card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 24px 20px;
-    position: relative; overflow: hidden;
-    transition: border-color 0.3s;
-  }
-  .req-card:hover { border-color: var(--gold-dim); }
-  .req-card::before {
-    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
-  }
-  .req-icon { font-size: 26px; margin-bottom: 12px; display: block; }
-  .req-title {
-    font-family: 'Cinzel', serif;
-    font-size: 11px; letter-spacing: 3px;
-    color: var(--gold); margin-bottom: 6px;
-    text-transform: uppercase;
-  }
-  .req-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
-  .req-desc a { color: var(--gold); text-decoration: none; }
-  .req-desc a:hover { color: var(--gold-l); }
-
-  /* ── FEATURES ── */
-  .features {
-    width: 100%; max-width: 900px;
-    margin-bottom: 60px;
-    animation: fadeUp 1s ease 0.7s both;
-  }
-  .section-title {
-    font-family: 'Cinzel', serif;
-    font-size: 11px; letter-spacing: 5px;
-    color: var(--muted); text-transform: uppercase;
-    text-align: center; margin-bottom: 28px;
-    display: flex; align-items: center; gap: 18px;
-  }
-  .section-title::before, .section-title::after {
-    content: ''; flex: 1; height: 1px; background: var(--border);
-  }
-  .features-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
-  }
-  .feature-item {
-    display: flex; align-items: flex-start; gap: 14px;
-    padding: 18px 20px;
-    background: var(--bg2); border: 1px solid var(--border);
-    transition: border-color 0.3s;
-  }
-  .feature-item:hover { border-color: var(--gold-dim); }
-  .feature-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--gold); flex-shrink: 0; margin-top: 6px;
-  }
-  .feature-text { font-size: 14px; color: var(--text); line-height: 1.5; }
-  .feature-text strong { color: var(--gold-l); font-weight: 600; }
-
-  /* ── FOOTER ── */
-  footer {
-    width: 100%; max-width: 900px;
-    border-top: 1px solid var(--border);
-    padding-top: 28px;
-    display: flex; justify-content: space-between; align-items: center;
-    animation: fadeUp 1s ease 0.8s both;
-  }
-  .footer-left {
-    font-family: 'Cinzel', serif;
-    font-size: 11px; letter-spacing: 3px; color: var(--muted);
-  }
-  .footer-links { display: flex; gap: 20px; }
-  .footer-links a {
-    font-size: 12px; color: var(--muted); text-decoration: none;
-    letter-spacing: 1px; transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--gold); }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 700px) {
-    .requirements { grid-template-columns: 1fr; }
-    .features-grid { grid-template-columns: 1fr; }
-    .card-info { grid-template-columns: 1fr 1fr; }
-    .download-card { padding: 28px 24px; }
-    footer { flex-direction: column; gap: 16px; text-align: center; }
-  }
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:700px){.requirements{grid-template-columns:1fr;}.features-grid{grid-template-columns:1fr;}.card-info{grid-template-columns:1fr 1fr;}.download-card{padding:28px 24px;}footer{flex-direction:column;gap:16px;text-align:center;}.nav-links{display:none;}}
 </style>
 </head>
 <body>
-
-<!-- Arrière-plan -->
 <div class="bg-grid"></div>
 <div class="bg-glow"></div>
 <div class="bg-glow2"></div>
 <div class="particles" id="particles"></div>
 
-<div class="wrapper">
-
-  <!-- Header -->
-  <header>
-    <div class="logo-area">
-      <svg class="logo-hex" viewBox="0 0 44 44">
-        <polygon points="22,2 40,12 40,32 22,42 4,32 4,12"
-                 fill="#0d1020" stroke="#c9a84c" stroke-width="1.5"/>
-        <polygon points="22,8 35,15 35,29 22,36 9,29 9,15"
-                 fill="none" stroke="#6a4e18" stroke-width="0.8"/>
-        <line x1="12" y1="22" x2="32" y2="22" stroke="#c9a84c" stroke-width="2"/>
-        <line x1="22" y1="12" x2="22" y2="32" stroke="#c9a84c" stroke-width="2"/>
-        <polygon points="22,10 24,14 20,14" fill="#c9a84c"/>
-        <polygon points="22,34 24,30 20,30" fill="#c9a84c"/>
-        <polygon points="12,22 16,20 16,24" fill="#c9a84c"/>
-        <polygon points="32,22 28,20 28,24" fill="#c9a84c"/>
-        <circle cx="22" cy="22" r="3" fill="#c9a84c"/>
-        <circle cx="22" cy="22" r="1.5" fill="#07090f"/>
-      </svg>
-      <div>
-        <div class="logo-title">LEGIO ORDO</div>
-        <div class="logo-sub">Minecraft Network</div>
-      </div>
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="38" height="38" viewBox="0 0 44 44">
+      <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="#0d1020" stroke="#c9a84c" stroke-width="1.5"/>
+      <polygon points="22,8 35,15 35,29 22,36 9,29 9,15" fill="none" stroke="#6a4e18" stroke-width="0.8"/>
+      <line x1="12" y1="22" x2="32" y2="22" stroke="#c9a84c" stroke-width="2"/>
+      <line x1="22" y1="12" x2="22" y2="32" stroke="#c9a84c" stroke-width="2"/>
+      <polygon points="22,10 24,14 20,14" fill="#c9a84c"/>
+      <polygon points="22,34 24,30 20,30" fill="#c9a84c"/>
+      <polygon points="12,22 16,20 16,24" fill="#c9a84c"/>
+      <polygon points="32,22 28,20 28,24" fill="#c9a84c"/>
+      <circle cx="22" cy="22" r="3" fill="#c9a84c"/>
+      <circle cx="22" cy="22" r="1.5" fill="#07090f"/>
+    </svg>
+    <div>
+      <span class="nav-title">LEGIO ORDO</span>
+      <span class="nav-sub">Minecraft Network</span>
     </div>
-    <div class="header-version">VERSION 1.0.0</div>
-  </header>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">⬇ T&eacute;l&eacute;charger</a></li>
+    <li><a href="boutique.html">&#x1F6D2; Boutique</a></li>
+    <li><a href="https://discord.gg/legioOrdo" target="_blank">&#x1F4AC; Discord</a></li>
+  </ul>
+  <a href="https://adfly.site/6vPnSiQ" class="nav-btn">&#9660; T&Eacute;L&Eacute;CHARGER</a>
+</nav>
 
-  <!-- Hero -->
+<div class="wrapper">
+  <!-- HERO -->
   <div class="hero">
-    <div class="hero-eyebrow">⚔ Launcher Officiel ⚔</div>
+    <div class="hero-eyebrow">&#x2694; Launcher Officiel &#x2694;</div>
     <h1 class="hero-title">LEGIO<br><span>ORDO</span></h1>
-    <p class="hero-sub">Rejoignez l'Empire. Forgez votre Légion. Combattez pour la gloire.</p>
-
-    <!-- Emblème SVG animé -->
+    <p class="hero-sub">Rejoignez l'Empire. Forgez votre L&eacute;gion. Combattez pour la gloire.</p>
     <div class="emblem-wrap">
       <svg width="120" height="120" viewBox="0 0 120 120">
         <defs>
@@ -418,153 +150,104 @@
             <stop offset="0%" stop-color="#1a1206"/>
             <stop offset="100%" stop-color="#03040a"/>
           </radialGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
         </defs>
-        <!-- Hexagone extérieur -->
-        <polygon points="60,5 108,32 108,88 60,115 12,88 12,32"
-                 fill="url(#hexGrad)" stroke="#c9a84c" stroke-width="2" filter="url(#glow)"/>
-        <!-- Anneau intérieur -->
-        <polygon points="60,18 96,38 96,78 60,98 24,78 24,38"
-                 fill="none" stroke="#6a4e18" stroke-width="1"/>
-        <!-- Points déco -->
-        <circle cx="60" cy="18" r="3" fill="#c9a84c" opacity="0.8"/>
-        <circle cx="96" cy="38" r="3" fill="#c9a84c" opacity="0.8"/>
-        <circle cx="96" cy="78" r="3" fill="#c9a84c" opacity="0.8"/>
-        <circle cx="60" cy="98" r="3" fill="#c9a84c" opacity="0.8"/>
-        <circle cx="24" cy="78" r="3" fill="#c9a84c" opacity="0.8"/>
-        <circle cx="24" cy="38" r="3" fill="#c9a84c" opacity="0.8"/>
-        <!-- Croix épées -->
+        <polygon points="60,5 108,32 108,88 60,115 12,88 12,32" fill="url(#hexGrad)" stroke="#c9a84c" stroke-width="2" filter="url(#glow)"/>
+        <polygon points="60,18 96,38 96,78 60,98 24,78 24,38" fill="none" stroke="#6a4e18" stroke-width="1"/>
+        <circle cx="60" cy="18" r="3" fill="#c9a84c" opacity=".8"/>
+        <circle cx="96" cy="38" r="3" fill="#c9a84c" opacity=".8"/>
+        <circle cx="96" cy="78" r="3" fill="#c9a84c" opacity=".8"/>
+        <circle cx="60" cy="98" r="3" fill="#c9a84c" opacity=".8"/>
+        <circle cx="24" cy="78" r="3" fill="#c9a84c" opacity=".8"/>
+        <circle cx="24" cy="38" r="3" fill="#c9a84c" opacity=".8"/>
         <line x1="28" y1="60" x2="92" y2="60" stroke="#c9a84c" stroke-width="3" stroke-linecap="round"/>
         <line x1="60" y1="28" x2="60" y2="92" stroke="#c9a84c" stroke-width="3" stroke-linecap="round"/>
-        <!-- Pointes -->
         <polygon points="60,22 63,30 57,30" fill="#c9a84c"/>
         <polygon points="60,98 63,90 57,90" fill="#c9a84c"/>
         <polygon points="22,60 30,57 30,63" fill="#c9a84c"/>
         <polygon points="98,60 90,57 90,63" fill="#c9a84c"/>
-        <!-- Centre -->
         <circle cx="60" cy="60" r="7" fill="#c9a84c"/>
         <circle cx="60" cy="60" r="3.5" fill="#03040a"/>
       </svg>
     </div>
   </div>
 
-  <!-- Carte téléchargement -->
-  <div class="download-card">
+  <!-- DOWNLOAD CARD -->
+  <div class="download-card" id="telecharger">
     <div class="corner corner-tl"></div>
     <div class="corner corner-tr"></div>
     <div class="corner corner-bl"></div>
     <div class="corner corner-br"></div>
-
     <div class="card-title">Launcher Officiel</div>
     <div class="card-name">LegioOrdo.exe</div>
-
     <div class="card-info">
-      <div class="info-item">
-        <div class="info-label">Version</div>
-        <div class="info-value">1.0.0</div>
-      </div>
-      <div class="info-item">
-        <div class="info-label">Plateforme</div>
-        <div class="info-value">Windows</div>
-      </div>
-      <div class="info-item">
-        <div class="info-label">MC</div>
-        <div class="info-value">1.20.4</div>
-      </div>
+      <div class="info-item"><div class="info-label">Version</div><div class="info-value">1.0.0</div></div>
+      <div class="info-item"><div class="info-label">Plateforme</div><div class="info-value">Windows</div></div>
+      <div class="info-item"><div class="info-label">MC</div><div class="info-value">1.20.4</div></div>
     </div>
-
-    <a class="btn-download"
-       href="https://adfly.site/6vPnSiQ">
+    <a class="btn-download" href="https://adfly.site/6vPnSiQ">
       <div class="btn-shine"></div>
-      <span class="btn-icon">⬇</span>
-      <span>TÉLÉCHARGER</span>
+      <span style="font-size:22px">&#x2B07;</span>
+      <span>T&Eacute;L&Eacute;CHARGER</span>
     </a>
-
-    <div class="btn-note">Windows 10/11 · 64-bit · Mise à jour automatique incluse</div>
+    <div class="btn-note">Windows 10/11 &middot; 64-bit &middot; Mise &agrave; jour automatique incluse</div>
   </div>
 
-  <!-- Prérequis -->
+  <!-- BANNIERE BOUTIQUE -->
+  <div class="shop-banner">
+    <div class="shop-banner-text">
+      <div class="shop-title">&#x1F6D2; BOUTIQUE VIP &mdash; SAISON I</div>
+      <div class="shop-sub">Grades Chevalier, Seigneur, Marquis, Prince &mdash; livraison automatique en jeu</div>
+    </div>
+    <a href="boutique.html" class="shop-banner-btn">VOIR LES GRADES &#x2192;</a>
+  </div>
+
+  <!-- REQUIREMENTS -->
   <div class="requirements">
     <div class="req-card">
-      <span class="req-icon">☕</span>
+      <span class="req-icon">&#x2615;</span>
       <div class="req-title">Java 17+</div>
-      <div class="req-desc">Requis pour lancer Minecraft.<br>
-        <a href="https://adoptium.net" target="_blank">Télécharger Java →</a>
-      </div>
+      <div class="req-desc">Requis pour lancer Minecraft.<br><a href="https://adoptium.net" target="_blank">T&eacute;l&eacute;charger Java &rarr;</a></div>
     </div>
     <div class="req-card">
-      <span class="req-icon">🎮</span>
+      <span class="req-icon">&#x1F3AE;</span>
       <div class="req-title">Compte Minecraft</div>
-      <div class="req-desc">Compte Microsoft avec Minecraft Java Edition acheté.</div>
+      <div class="req-desc">Compte Microsoft avec Minecraft Java Edition achet&eacute;.</div>
     </div>
     <div class="req-card">
-      <span class="req-icon">💻</span>
+      <span class="req-icon">&#x1F4BB;</span>
       <div class="req-title">Configuration</div>
-      <div class="req-desc">Windows 10/11 · 4 Go RAM minimum · 2 Go disque libre.</div>
+      <div class="req-desc">Windows 10/11 &middot; 4 Go RAM minimum &middot; 2 Go disque libre.</div>
     </div>
   </div>
 
-  <!-- Fonctionnalités -->
+  <!-- FEATURES -->
   <div class="features">
-    <div class="section-title">Fonctionnalités</div>
+    <div class="section-title">Fonctionnalit&eacute;s</div>
     <div class="features-grid">
-      <div class="feature-item">
-        <div class="feature-dot"></div>
-        <div class="feature-text"><strong>Connexion Microsoft</strong> — Authentification sécurisée avec votre vrai compte Minecraft.</div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-dot"></div>
-        <div class="feature-text"><strong>Mise à jour automatique</strong> — Le launcher se met à jour sans intervention.</div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-dot"></div>
-        <div class="feature-text"><strong>Gestion de la RAM</strong> — Allouez la mémoire idéale pour votre machine.</div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-dot"></div>
-        <div class="feature-text"><strong>Classement en direct</strong> — Consultez le top des joueurs directement depuis le launcher.</div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-dot"></div>
-        <div class="feature-text"><strong>Serveur</strong> play.legio-ordo.fr — Connexion directe en un clic.</div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-dot"></div>
-        <div class="feature-text"><strong>Interface immersive</strong> — Design exclusif inspiré de l'univers Romain.</div>
-      </div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Connexion Microsoft</strong> &mdash; Authentification s&eacute;curis&eacute;e avec votre vrai compte Minecraft.</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Mise &agrave; jour automatique</strong> &mdash; Le launcher se met &agrave; jour sans intervention.</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Gestion de la RAM</strong> &mdash; Allouez la m&eacute;moire id&eacute;ale pour votre machine.</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Classement en direct</strong> &mdash; Consultez le top des joueurs directement depuis le launcher.</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Serveur</strong> play.legio-ordo.fr &mdash; Connexion directe en un clic.</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-text"><strong>Interface immersive</strong> &mdash; Design exclusif inspir&eacute; de l'univers Romain.</div></div>
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer>
-    <div class="footer-left">© 2024 LEGIO ORDO NETWORK</div>
+    <div class="footer-left">&copy; 2024 LEGIO ORDO NETWORK</div>
     <div class="footer-links">
+      <a href="boutique.html">&#x1F6D2; Boutique</a>
       <a href="https://discord.gg/legioOrdo">Discord</a>
       <a href="https://github.com/XwatelbusteurX/legio-ordo-launcher/releases">Releases</a>
     </div>
   </footer>
-
 </div>
 
 <script>
-// Particules
-const container = document.getElementById('particles');
-for (let i = 0; i < 35; i++) {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  const size = Math.random() * 3 + 1;
-  p.style.cssText = `
-    width: ${size}px; height: ${size}px;
-    left: ${Math.random() * 100}%;
-    animation-duration: ${Math.random() * 15 + 10}s;
-    animation-delay: ${Math.random() * 10}s;
-    opacity: ${Math.random() * 0.5 + 0.1};
-  `;
-  container.appendChild(p);
-}
+const container=document.getElementById('particles');
+for(let i=0;i<35;i++){const p=document.createElement('div');p.className='particle';const s=Math.random()*3+1;p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;container.appendChild(p);}
 </script>
 </body>
 </html>
