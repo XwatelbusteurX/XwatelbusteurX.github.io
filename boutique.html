@@ -59,8 +59,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:58px;background:rgba(
 .nav-links{display:flex;align-items:center;gap:4px;list-style:none;margin-left:16px;}
 .nav-links a{color:var(--muted);text-decoration:none;font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;padding:6px 16px;transition:color .2s;border:1px solid transparent;}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);border-color:var(--gold-d);}
-.nav-btn{margin-left:auto;font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:#000;background:linear-gradient(135deg,var(--gold-d),var(--gold));padding:8px 20px;text-decoration:none;font-weight:900;transition:opacity .2s;flex-shrink:0;}
-.nav-btn:hover{opacity:.85;}
+.nav-btn{margin-left:auto;font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:#000;background:linear-gradient(135deg,var(--gold-d),var(--gold));padding:8px 20px;text-decoration:none;font-weight:900;transition:all .25s ease;flex-shrink:0;border-radius:8px;position:relative;overflow:hidden;box-shadow:0 0 10px rgba(201,168,76,.2);}
+.nav-btn:hover{opacity:1;transform:translateY(-2px);box-shadow:0 0 22px rgba(201,168,76,.55);filter:brightness(1.15);}
+.nav-btn:active{transform:translateY(0);}
 @media(max-width:600px){.nav-btn{display:none;}}
 .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;margin-left:auto;}
 .nav-hamburger span{width:22px;height:2px;background:var(--gold);display:block;transition:all .3s;}
@@ -84,10 +85,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:58px;background:rgba(
 .perk-item{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--muted);line-height:1.4;}
 .perk-dot{flex-shrink:0;margin-top:4px;width:4px;height:4px;border-radius:50%;background:var(--gold);}
 .card-buy{padding:10px 12px 14px;}
-.btn-acheter{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px 8px;background:linear-gradient(135deg,#1a1206,#0d0c06);border:1px solid var(--gold-d);color:var(--gold-l);font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:2px;text-decoration:none;cursor:pointer;position:relative;overflow:hidden;transition:all .3s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);}
-.btn-acheter::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.15),transparent);opacity:0;transition:opacity .3s;}
-.btn-acheter:hover{border-color:var(--gold-l);color:#fff;transform:translateY(-1px);}
+.btn-acheter{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px 8px;background:linear-gradient(180deg,#1c1508 0%,#0a0900 100%);border:1px solid var(--gold-d);color:var(--gold-l);font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:2px;text-decoration:none;cursor:pointer;position:relative;overflow:hidden;transition:all .25s ease;border-radius:8px;box-shadow:0 0 8px rgba(201,168,76,.1);}
+.btn-acheter::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.15),transparent);opacity:0;transition:opacity .25s;}
+.btn-acheter:hover{border-color:var(--gold-l);color:#fff;transform:translateY(-2px);box-shadow:0 0 22px rgba(201,168,76,.4);}
 .btn-acheter:hover::before{opacity:1;}
+.btn-acheter:active{transform:translateY(0);}
 .btn-shine{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);transform:skewX(-20deg);animation:shine 4s ease-in-out infinite;}
 @keyframes shine{0%,70%{left:-100%;}100%{left:200%;}}
 /* SECURE */
@@ -201,7 +203,7 @@ footer{width:100%;max-width:1100px;border-top:1px solid var(--border);padding-to
     <li><a href="boutique.html" class="active">&#x1F6D2; Boutique</a></li>
     <li><a href="https://discord.gg/legioOrdo" target="_blank">&#x1F4AC; Discord</a></li>
   </ul>
-  <a href="index.html" class="nav-btn">T&Eacute;L&Eacute;CHARGER</a>
+
   <div class="nav-hamburger" onclick="toggleMenu()" id="hamburger">
     <span></span><span></span><span></span>
   </div>

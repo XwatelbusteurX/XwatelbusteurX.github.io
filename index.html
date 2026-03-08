@@ -21,18 +21,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:58px;background:rgba(
 .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0;}
 .nav-title{font-family:'Cinzel',serif;font-size:16px;font-weight:900;color:var(--gold);letter-spacing:4px;display:block;}
 .nav-sub{font-family:'Rajdhani',sans-serif;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;display:block;}
-.nav-links{display:flex;align-items:center;gap:4px;list-style:none;margin-left:16px;}
+.nav-links{display:none;align-items:center;gap:4px;list-style:none;margin-left:16px;}
 .nav-links a{color:var(--muted);text-decoration:none;font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;padding:6px 16px;transition:color .2s;position:relative;border:1px solid transparent;}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);border-color:var(--gold-d);}
-.nav-btn{margin-left:auto;font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:#000;background:linear-gradient(135deg,var(--gold-d),var(--gold));padding:8px 20px;text-decoration:none;font-weight:900;transition:opacity .2s;flex-shrink:0;}
-.nav-btn:hover{opacity:.85;}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;margin-left:auto;}
-.nav-hamburger span{width:22px;height:2px;background:var(--gold);display:block;transition:all .3s;}
-.nav-mobile-menu{display:none;position:fixed;top:58px;left:0;right:0;background:rgba(3,4,10,.98);border-bottom:1px solid var(--gold-d);z-index:99;flex-direction:column;padding:10px 0;}
-.nav-mobile-menu a{color:var(--muted);text-decoration:none;font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;padding:14px 24px;border-bottom:1px solid var(--border);display:block;transition:color .2s;}
-.nav-mobile-menu a:hover,.nav-mobile-menu a.active{color:var(--gold);}
-.nav-mobile-menu.open{display:flex;}
-@media(max-width:600px){.nav-hamburger{display:flex;}}
+.nav-btn{margin-left:auto;font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:#000;background:linear-gradient(135deg,var(--gold-d),var(--gold));padding:8px 20px;text-decoration:none;font-weight:900;transition:all .25s ease;flex-shrink:0;border-radius:8px;position:relative;overflow:hidden;box-shadow:0 0 10px rgba(201,168,76,.2);}
+.nav-btn::after{content:'';position:absolute;inset:0;border-radius:8px;background:rgba(255,255,255,0);transition:background .25s;}
+.nav-btn:hover{opacity:1;transform:translateY(-2px);box-shadow:0 0 22px rgba(201,168,76,.55);filter:brightness(1.15);}
+.nav-btn:active{transform:translateY(0);}
 
 /* ── LAYOUT ── */
 .wrapper{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:90px 20px 60px;}
@@ -62,12 +57,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:58px;background:rgba(
 .info-item{background:var(--bg2);border:1px solid var(--border);padding:12px 14px;text-align:center;}
 .info-label{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;}
 .info-value{font-family:'Cinzel',serif;font-size:14px;color:var(--gold);}
-.btn-download{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;padding:18px 24px;background:linear-gradient(135deg,#1a1206,#0d0c06);border:1px solid var(--gold);color:var(--gold-l);font-family:'Cinzel',serif;font-size:16px;font-weight:600;letter-spacing:3px;text-transform:uppercase;text-decoration:none;cursor:pointer;position:relative;overflow:hidden;transition:all .3s;clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);margin-bottom:14px;}
-.btn-download::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.15),transparent);opacity:0;transition:opacity .3s;}
-.btn-download:hover{border-color:var(--gold-l);color:#fff;transform:translateY(-2px);}
+.btn-download{display:flex;align-items:center;justify-content:center;gap:16px;width:100%;padding:20px 32px;background:linear-gradient(180deg,#1c1508 0%,#0a0900 100%);border:2px solid var(--gold);border-radius:8px;color:var(--gold-l);font-family:'Cinzel',serif;font-size:18px;font-weight:900;letter-spacing:4px;text-transform:uppercase;text-decoration:none;cursor:pointer;position:relative;overflow:hidden;transition:all .25s ease;margin-bottom:14px;box-shadow:0 0 18px rgba(201,168,76,.15),inset 0 1px 0 rgba(201,168,76,.1);}
+.btn-download::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(201,168,76,.12) 0%,transparent 60%);opacity:0;transition:opacity .25s;}
+.btn-download:hover{background:linear-gradient(180deg,#2a1e08 0%,#100e00 100%);border-color:var(--gold-l);color:#fff;box-shadow:0 0 40px rgba(201,168,76,.45),inset 0 1px 0 rgba(255,255,255,.08);transform:translateY(-1px);}
 .btn-download:hover::before{opacity:1;}
-.btn-shine{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);transform:skewX(-20deg);animation:shine 4s ease-in-out infinite;}
-@keyframes shine{0%,70%{left:-100%;}100%{left:200%;}}
+.btn-download:hover .btn-arrow{transform:translateX(4px);}
+.btn-arrow{font-size:20px;transition:transform .25s ease;display:inline-block;color:var(--gold);}
+.btn-shine{position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);transform:skewX(-20deg);animation:shine 3.5s ease-in-out infinite;}
+@keyframes shine{0%,65%{left:-100%;}100%{left:220%;}}
 .btn-note{font-size:11px;color:var(--muted);letter-spacing:1px;text-align:center;}
 
 /* ── BANNIERE BOUTIQUE ── */
@@ -75,8 +72,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:58px;background:rgba(
 .shop-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d),transparent);}
 .shop-banner-text .shop-title{font-family:'Cinzel',serif;font-size:13px;color:var(--gold-l);letter-spacing:2px;margin-bottom:4px;}
 .shop-banner-text .shop-sub{font-size:12px;color:var(--muted);}
-.shop-banner-btn{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:#000;background:linear-gradient(135deg,var(--gold-d),var(--gold));padding:10px 18px;text-decoration:none;font-weight:900;white-space:nowrap;transition:opacity .2s;flex-shrink:0;}
-.shop-banner-btn:hover{opacity:.85;}
+.shop-banner-btn{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:#000;background:linear-gradient(135deg,var(--gold-d),var(--gold));padding:10px 18px;text-decoration:none;font-weight:900;white-space:nowrap;transition:all .25s ease;flex-shrink:0;border-radius:8px;position:relative;overflow:hidden;box-shadow:0 0 10px rgba(201,168,76,.2);}
+.shop-banner-btn:hover{opacity:1;transform:translateY(-2px);box-shadow:0 0 22px rgba(201,168,76,.55);filter:brightness(1.15);}
+.shop-banner-btn:active{transform:translateY(0);}
 
 /* ── REQUIREMENTS ── */
 .requirements{width:100%;max-width:900px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:50px;animation:fadeUp 1s ease .5s both;}
@@ -107,50 +105,7 @@ footer{width:100%;max-width:900px;border-top:1px solid var(--border);padding-top
 .footer-links a:hover{color:var(--gold);}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-/* ── RESPONSIVE MOBILE ── */
-@media(max-width:700px){
-  /* Navbar */
-  nav{padding:0 14px;gap:10px;}
-  .nav-title{font-size:13px;letter-spacing:2px;}
-  .nav-sub{display:none;}
-  .nav-links{display:none;}
-  nav svg{width:30px;height:30px;}
-
-  /* Wrapper */
-  .wrapper{padding:72px 12px 40px;}
-
-  /* Hero */
-  .hero{margin-bottom:32px;}
-  .hero-title{font-size:clamp(28px,10vw,52px);}
-  .hero-sub{font-size:13px;}
-  .emblem-wrap svg{width:80px;height:80px;}
-
-  /* Download card */
-  .download-card{padding:22px 16px;margin-bottom:24px;}
-  .card-name{font-size:18px;}
-  .card-info{grid-template-columns:1fr 1fr;}
-  .btn-download{font-size:13px;padding:14px 12px;}
-
-  /* Bannière boutique */
-  .shop-banner{flex-direction:column;text-align:center;padding:16px;gap:12px;}
-  .shop-banner-btn{width:100%;text-align:center;padding:12px;}
-
-  /* Requirements */
-  .requirements{grid-template-columns:1fr;gap:10px;}
-
-  /* Features */
-  .features-grid{grid-template-columns:1fr;}
-
-  /* Footer */
-  footer{flex-direction:column;gap:12px;text-align:center;}
-  .footer-links{flex-wrap:wrap;justify-content:center;}
-}
-
-@media(max-width:400px){
-  .card-info{grid-template-columns:1fr;}
-  .hero-title{font-size:26px;}
-  .download-card{padding:16px 12px;}
-}
+@media(max-width:700px){.requirements{grid-template-columns:1fr;}.features-grid{grid-template-columns:1fr;}.card-info{grid-template-columns:1fr 1fr;}.download-card{padding:28px 24px;}footer{flex-direction:column;gap:16px;text-align:center;}.nav-links{display:none;}}
 </style>
 </head>
 <body>
@@ -184,14 +139,7 @@ footer{width:100%;max-width:900px;border-top:1px solid var(--border);padding-top
     <li><a href="boutique.html">&#x1F6D2; Boutique</a></li>
     <li><a href="https://discord.gg/legioOrdo" target="_blank">&#x1F4AC; Discord</a></li>
   </ul>
-  <!-- Bouton masqué sur la page téléchargement -->
-  <div class="nav-hamburger" onclick="toggleMenu()" id="hamburger">
-    <span></span><span></span><span></span>
-  </div>
-  <div class="nav-mobile-menu" id="mobileMenu">
-    <a href="boutique.html">&#x1F6D2; Boutique</a>
-    <a href="https://discord.gg/legioOrdo" target="_blank">&#x1F4AC; Discord</a>
-  </div>
+  <a href="boutique.html" class="nav-btn">&#x1F6D2; BOUTIQUE</a>
 </nav>
 
 <div class="wrapper">
@@ -244,7 +192,7 @@ footer{width:100%;max-width:900px;border-top:1px solid var(--border);padding-top
     </div>
     <a class="btn-download" href="https://adfly.site/6vPnSiQ">
       <div class="btn-shine"></div>
-      <span style="font-size:22px">&#x2B07;</span>
+      <span class="btn-arrow">&#x25BA;</span>
       <span>T&Eacute;L&Eacute;CHARGER</span>
     </a>
     <div class="btn-note">Windows 10/11 &middot; 64-bit &middot; Mise &agrave; jour automatique incluse</div>
@@ -305,20 +253,6 @@ footer{width:100%;max-width:900px;border-top:1px solid var(--border);padding-top
 <script>
 const container=document.getElementById('particles');
 for(let i=0;i<35;i++){const p=document.createElement('div');p.className='particle';const s=Math.random()*3+1;p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;container.appendChild(p);}
-
-function toggleMenu(){
-  const m=document.getElementById('mobileMenu');
-  const h=document.getElementById('hamburger');
-  m.classList.toggle('open');
-  const spans=h.querySelectorAll('span');
-  if(m.classList.contains('open')){
-    spans[0].style.transform='rotate(45deg) translate(5px,5px)';
-    spans[1].style.opacity='0';
-    spans[2].style.transform='rotate(-45deg) translate(5px,-5px)';
-  } else {
-    spans[0].style.transform='';spans[1].style.opacity='';spans[2].style.transform='';
-  }
-}
 </script>
 </body>
 </html>
